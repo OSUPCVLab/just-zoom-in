@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Just Zoom In &mdash; Cross-View Geo-Localization via Autoregressive Zooming</title>
+  <meta name="description" content="Find where a photo was taken using just four zoom-in steps over a satellite map. No GPS, no million-tile database. State-of-the-art cross-view geo-localization from The Ohio State University.">
+  <meta property="og:title" content="Just Zoom In: Cross-View Geo-Localization via Autoregressive Zooming">
+  <meta property="og:description" content="Find where a photo was taken using four zoom-in steps. No GPS, no database search.">
+  <meta property="og:image" content="static/images/teaser_paradigms.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-inner">
+    <div class="venue-chip">CVPR 2026 &middot; Submission</div>
+    <h1 class="hero-title">
+      Just <span class="accent">Zoom In</span>.
+    </h1>
+    <p class="hero-sub">
+      Cross-View Geo-Localization via Autoregressive Zooming
+    </p>
+    <p class="hero-tagline">
+      Find where a photo was taken &mdash; <strong>no&nbsp;GPS</strong>, <strong>no million-tile database&nbsp;search</strong>, just four zoom-in steps over a satellite map.
+    </p>
+
+    <div class="authors">
+      <span>Yunus Talha Erzurumlu</span>
+      <span>Jiyong Kwag</span>
+      <span>Alper Yilmaz</span>
+    </div>
+    <div class="affiliation">The Ohio State University</div>
+
+    <div class="badges">
+      <a class="badge" href="#" aria-label="Paper PDF">
+        <span class="badge-icon">&#128196;</span><span>Paper</span>
+      </a>
+      <a class="badge" href="#" aria-label="arXiv">
+        <span class="badge-icon">&#9881;</span><span>arXiv</span>
+      </a>
+      <a class="badge badge-disabled" aria-disabled="true">
+        <span class="badge-icon">&lt;/&gt;</span><span>Code &middot; <em>coming&nbsp;soon</em></span>
+      </a>
+      <a class="badge badge-disabled" aria-disabled="true">
+        <span class="badge-icon">&#128202;</span><span>Dataset &middot; <em>coming&nbsp;soon</em></span>
+      </a>
+      <a class="badge" href="#bibtex">
+        <span class="badge-icon">&#128221;</span><span>BibTeX</span>
+      </a>
+    </div>
+
+    <div class="stat-strip">
+      <div class="stat">
+        <div class="stat-num">+9.6<span class="stat-unit">%</span></div>
+        <div class="stat-label">Recall@100m vs. SOTA<br><span class="dim">(retrieval baseline)</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4<span class="stat-unit"> steps</span></div>
+        <div class="stat-label">10&thinsp;km &rarr; 156&thinsp;m<br><span class="dim">coarse-to-fine zoom</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">42<span class="stat-unit">%</span></div>
+        <div class="stat-label">Less training time<br><span class="dim">no hard negative mining</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ INTERACTIVE ZOOM DEMO ============================ -->
+<section class="section section-demo" id="demo">
+  <div class="container">
+    <div class="section-header">
+      <div class="kicker">See it in action</div>
+      <h2>One street photo. Four decisions. Find the spot.</h2>
+      <p class="lede">
+        Watch the model collapse a <strong>10&nbsp;km &times; 10&nbsp;km</strong> region down to a <strong>39&nbsp;m &times; 39&nbsp;m</strong> patch in four zoom-in steps. The yellow square is where the model decides to zoom next; the red dot is the ground-truth GPS location.
+      </p>
+    </div>
+
+    <div class="zoom-grid">
+      <!-- Example 1 -->
+      <div class="zoom-row">
+        <div class="zoom-street">
+          <img src="static/images/zoom/ex1_street.jpg" alt="Street-view query &mdash; example 1" loading="lazy">
+          <div class="zoom-caption">Query <span class="muted">&middot; street view</span></div>
+        </div>
+        <div class="zoom-arrow">&rarr;</div>
+        <div class="zoom-anim">
+          <img src="static/images/zoom/ex1_zoom.gif" alt="Autoregressive zoom-in sequence &mdash; example 1" loading="lazy">
+          <div class="zoom-scale-track">
+            <span>10&thinsp;km</span><span>2.5&thinsp;km</span><span>625&thinsp;m</span><span>156&thinsp;m</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 2 -->
+      <div class="zoom-row">
+        <div class="zoom-street">
+          <img src="static/images/zoom/ex2_street.jpg" alt="Street-view query &mdash; example 2" loading="lazy">
+          <div class="zoom-caption">Query <span class="muted">&middot; street view</span></div>
+        </div>
+        <div class="zoom-arrow">&rarr;</div>
+        <div class="zoom-anim">
+          <img src="static/images/zoom/ex2_zoom.gif" alt="Autoregressive zoom-in sequence &mdash; example 2" loading="lazy">
+          <div class="zoom-scale-track">
+            <span>10&thinsp;km</span><span>2.5&thinsp;km</span><span>625&thinsp;m</span><span>156&thinsp;m</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 3 -->
+      <div class="zoom-row">
+        <div class="zoom-street">
+          <img src="static/images/zoom/ex3_street.jpg" alt="Street-view query &mdash; example 3" loading="lazy">
+          <div class="zoom-caption">Query <span class="muted">&middot; street view</span></div>
+        </div>
+        <div class="zoom-arrow">&rarr;</div>
+        <div class="zoom-anim">
+          <img src="static/images/zoom/ex3_zoom.gif" alt="Autoregressive zoom-in sequence &mdash; example 3" loading="lazy">
+          <div class="zoom-scale-track">
+            <span>10&thinsp;km</span><span>2.5&thinsp;km</span><span>625&thinsp;m</span><span>156&thinsp;m</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ USE CASES ============================ -->
+<section class="section section-use" id="use-cases">
+  <div class="container">
+    <div class="section-header">
+      <div class="kicker">Why it matters</div>
+      <h2>Where this changes the game</h2>
+      <p class="lede">
+        GPS isn&rsquo;t always available &mdash; jammed, spoofed, blocked by terrain, or just unreliable indoors and underground. <em>Just Zoom In</em> localizes a single photo against publicly available satellite imagery, with a tiny inference footprint that fits on the edge.
+      </p>
+    </div>
+
+    <div class="pills">
+      <div class="pill">
+        <div class="pill-icon">&#128752;</div>
+        <h3>Drone &amp; UAV navigation</h3>
+        <p>Recover position from on-board cameras when GPS is jammed, spoofed, or unavailable &mdash; over cities, forests, or open terrain.</p>
+      </div>
+      <div class="pill">
+        <div class="pill-icon">&#128663;</div>
+        <h3>Autonomous vehicle backup</h3>
+        <p>Visual fallback for GPS dropouts in tunnels, urban canyons, and parking structures &mdash; matched directly against satellite maps.</p>
+      </div>
+      <div class="pill">
+        <div class="pill-icon">&#128737;</div>
+        <h3>Search &amp; rescue</h3>
+        <p>Pinpoint where a victim&rsquo;s photo, dash-cam frame, or witness image was taken &mdash; without metadata, GPS, or panoramas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ HOW IT WORKS ============================ -->
+<section class="section" id="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <div class="kicker">How it works</div>
+      <h2>Localization as a sequence of decisions</h2>
+    </div>
+
+    <div class="two-col">
+      <div class="prose">
+        <p>Conventional cross-view methods treat the world as a flat database of satellite tiles and pick the closest match by similarity. That requires <strong>millions of stored embeddings</strong>, expensive nearest-neighbor search, and a contrastive training pipeline with hard&nbsp;negative mining.</p>
+        <p><em>Just Zoom In</em> reformulates the problem as <strong>autoregressive zooming</strong>. The model starts from a wide satellite view and, at each step, picks one of 16 sub-patches to zoom into. After four steps, it has narrowed in on a 39&thinsp;m &times; 39&thinsp;m cell &mdash; the predicted location.</p>
+        <p>The architecture is intentionally simple: a shared DINOv2 vision encoder for both street and satellite views, plus a small causal transformer that predicts the next zoom action. <strong>No contrastive loss. No hard negative mining. No database scan.</strong></p>
+      </div>
+      <div class="figure-card">
+        <img src="static/images/method_overview.png" alt="Just Zoom In architecture: shared DINOv2 encoder + causal transformer for next-action prediction" loading="lazy">
+        <div class="figure-caption">Image tokens (street + multi-scale satellite) flow into a causal transformer that predicts the next zoom action at each step.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ THE MOTIVATION PROBLEM ============================ -->
+<section class="section section-tinted" id="motivation">
+  <div class="container">
+    <div class="section-header">
+      <div class="kicker">The problem we set out to solve</div>
+      <h2>Coverage mismatch breaks tile retrieval</h2>
+      <p class="lede">
+        A street view often sees landmarks that fall <em>outside</em> the satellite patch it&rsquo;s matched against &mdash; the stadium and its gate below are visible from the ground but cropped out of the candidate tile. Retrieval models trained on isolated tiles never learn this multi-scale context. Zooming does.
+      </p>
+    </div>
+
+    <div class="figure-card wide">
+      <img src="static/images/coverage_mismatch.png" alt="Coverage mismatch between street-view image and a small satellite tile" loading="lazy">
+    </div>
+
+    <div class="two-col" style="margin-top: 3.5rem;">
+      <div class="figure-card">
+        <img src="static/images/teaser_paradigms.png" alt="Retrieval vs. autoregressive zooming paradigms" loading="lazy">
+      </div>
+      <div class="prose">
+        <h3 class="sub-h">Two paradigms, side by side</h3>
+        <p><strong>(a) Retrieval-based.</strong> Encode every satellite tile, store all embeddings, search for the nearest one to the query at inference. Linear in database size.</p>
+        <p><strong>(b) Autoregressive zooming (ours).</strong> Sequential, coarse-to-fine zoom-in decisions. Cost scales with the number of zoom steps &mdash; not the size of the map.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ DATASET ============================ -->
+<section class="section" id="dataset">
+  <div class="container">
+    <div class="section-header">
+      <div class="kicker">A realistic benchmark</div>
+      <h2>Trained on real-world photos, not lab panoramas</h2>
+      <p class="lede">
+        Existing datasets use 360&deg; panoramas with known orientation &mdash; conditions you never get from a real phone, dash-cam, or drone. We built a new benchmark with crowd-sourced street imagery from Mapillary across Washington&nbsp;D.C., paired with government high-resolution orthophotos. <strong>~300,000 street-view images</strong> spanning weather, season, time of day, and camera type.
+      </p>
+    </div>
+
+    <div class="figure-card wide">
+      <img src="static/images/dataset_diversity.jpg" alt="Diverse street-view captures: weather, season, time of day, camera" loading="lazy">
+      <div class="figure-caption">Diversity of street-view conditions in the benchmark &mdash; the kind of variability real industry systems must handle.</div>
+    </div>
+
+    <div class="two-col" style="margin-top: 3.5rem;">
+      <div class="figure-card">
+        <img src="static/images/dataset_map.png" alt="Dataset spatial coverage over Washington D.C." loading="lazy">
+        <div class="figure-caption">Coverage map: blue = no photos, red = densest sampling. ~10&thinsp;km &times; 10&thinsp;km region across urban and rural D.C.</div>
+      </div>
+      <div class="prose">
+        <h3 class="sub-h">What&rsquo;s different from prior benchmarks</h3>
+        <ul class="check-list">
+          <li><span class="check">&#10003;</span> <strong>Limited, random field of view</strong> &mdash; not 360&deg; panoramas</li>
+          <li><span class="check">&#10003;</span> <strong>Unknown orientation</strong> &mdash; matches real-world capture</li>
+          <li><span class="check">&#10003;</span> <strong>Crowd-sourced quality</strong> &mdash; blur, glare, occlusion, diverse cameras</li>
+          <li><span class="check">&#10003;</span> <strong>Multi-scale satellite hierarchy</strong> &mdash; 10&thinsp;km / 2.5&thinsp;km / 625&thinsp;m / 156&thinsp;m</li>
+          <li><span class="check">&#10003;</span> <strong>Permissive licensing</strong> &mdash; CC&nbsp;BY-SA street, CC&nbsp;BY&nbsp;4.0 satellite</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ RESULTS ============================ -->
+<section class="section section-tinted" id="results">
+  <div class="container">
+    <div class="section-header">
+      <div class="kicker">Results</div>
+      <h2>State-of-the-art &mdash; with less compute</h2>
+      <p class="lede">
+        On our benchmark, <em>Just Zoom In</em> beats the strongest contrastive-retrieval baseline (Sample4Geo) on every Recall threshold, while using <strong>43% less inference memory</strong> and <strong>42% less training time</strong>.
+      </p>
+    </div>
+
+    <div class="results-table-wrap">
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>R@40m &uarr;</th>
+            <th>R@50m &uarr;</th>
+            <th>R@100m &uarr;</th>
+            <th>Inf. Memory &darr;</th>
+            <th>Train. Time &darr;</th>
+            <th>HNM needed?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SAIG-D</td>
+            <td>39.36</td><td>47.52</td><td>64.17</td>
+            <td>18&nbsp;GB</td><td>&gt;90 h</td><td>Yes</td>
+          </tr>
+          <tr>
+            <td>TransGeo</td>
+            <td>45.97</td><td>54.55</td><td>67.61</td>
+            <td>11&nbsp;GB</td><td>&gt;90 h</td><td>Yes</td>
+          </tr>
+          <tr>
+            <td>Sample4Geo</td>
+            <td>52.85</td><td>60.81</td><td>71.30</td>
+            <td>16&nbsp;GB</td><td>&gt;90 h</td><td>Yes</td>
+          </tr>
+          <tr class="row-ours">
+            <td><strong>Just Zoom In (BS&nbsp;128)</strong></td>
+            <td><strong>55.74</strong></td>
+            <td><strong>66.31</strong></td>
+            <td><strong>80.93</strong></td>
+            <td><strong>9&nbsp;GB</strong></td>
+            <td><strong>52 h</strong></td>
+            <td><strong>No</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="table-caption">Recall@1 within &tau; meters on our multi-scale benchmark. Inference memory is peak required to store and search the reference database. Training time on a single NVIDIA A6000. HNM = hard negative mining.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ QUALITATIVE ============================ -->
+<section class="section" id="qualitative">
+  <div class="container">
+    <div class="section-header">
+      <div class="kicker">Qualitative</div>
+      <h2>What the model attends to</h2>
+      <p class="lede">
+        Cross-view feature similarities show the model focuses on persistent structural cues &mdash; rooflines, road geometry, building shapes &mdash; that survive the viewpoint gap between ground and air.
+      </p>
+    </div>
+    <div class="figure-card wide">
+      <img src="static/images/similarities.jpg" alt="Cross-view feature similarity visualizations" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============================ BIBTEX ============================ -->
+<section class="section section-tinted" id="bibtex">
+  <div class="container">
+    <div class="section-header">
+      <div class="kicker">Cite this work</div>
+      <h2>BibTeX</h2>
+    </div>
+    <div class="bibtex-wrap">
+      <button class="copy-btn" type="button" id="copyBibtex" aria-label="Copy BibTeX">Copy</button>
+      <pre id="bibtex-block"><code>@inproceedings{erzurumlu2026zoom,
+  title     = {Just Zoom In: Cross-View Geo-Localization via Autoregressive Zooming},
+  author    = {Erzurumlu, Yunus Talha and Kwag, Jiyong and Yilmaz, Alper},
+  booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2026}
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="container">
+    <p class="ack">
+      <strong>Acknowledgments.</strong> Street-view imagery is sourced from <a href="https://www.mapillary.com/" target="_blank" rel="noopener">Mapillary</a> (CC&nbsp;BY-SA). Aerial orthophotos are sourced from the <a href="https://opendata.dc.gov/" target="_blank" rel="noopener">Open Data DC</a> portal (CC&nbsp;BY&nbsp;4.0).
+    </p>
+    <p class="footer-meta">
+      Page template adapted from the <a href="https://nerfies.github.io/" target="_blank" rel="noopener">Nerfies</a> project page. &copy; 2026 The Photogrammetric Computer Vision Lab, The Ohio State University.
+    </p>
+  </div>
+</footer>
+
+<script src="static/js/main.js"></script>
+</body>
+</html>
