@@ -45,7 +45,6 @@
 <header class="hero" id="top">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="container hero-inner">
-    <div class="venue-chip">CVPR 2026 &middot; Submission</div>
     <h1 class="hero-title">
       Just <span class="accent">Zoom In</span>
     </h1>
@@ -58,7 +57,7 @@
 
     <div class="authors-line">
       <span class="authors">
-        <span>Yunus Talha Erzurumlu</span><span class="dot">&middot;</span><span>Jiyong Kwag</span><span class="dot">&middot;</span><span>Alper Yilmaz</span>
+        <span>Yunus Talha Erzurumlu</span><span class="dot">&middot;</span><span>Jiyong Kwag</span><span class="dot">&middot;</span><span>Charles Toth</span><span class="dot">&middot;</span><span>Alper Yilmaz</span>
       </span>
       <span class="aff-sep">&mdash;</span>
       <span class="affiliation">The Ohio State University</span>
@@ -179,6 +178,23 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ QUALITATIVE (heatmaps) ============================ -->
+<section class="section section-heatmap" id="qualitative">
+  <div class="container">
+    <div class="section-header">
+      <div class="kicker">Where the model looks</div>
+      <h2>The model lights up the right place on the map</h2>
+      <p class="lede">
+        Cross-view similarity heatmaps overlaid on the satellite view show <strong>where the model believes the photo was taken</strong>. Warm colors mark high similarity to the street-view query; the white <strong>&times;</strong> marks the ground-truth GPS location. The hot region lands directly on it &mdash; even with no panorama, no GPS prior, and limited field of view.
+      </p>
+    </div>
+    <div class="figure-card wide">
+      <img src="static/images/dino_heatmap.png" alt="Cross-view similarity heatmaps over satellite imagery; white X marks ground-truth GPS" loading="lazy">
+      <div class="figure-caption">Each row: a street-view query (left) and the corresponding cross-view similarity heatmaps over the satellite tile. The white &times; marks ground truth.</div>
     </div>
   </div>
 </section>
@@ -358,23 +374,6 @@
         </tbody>
       </table>
       <p class="table-caption">Recall@1 within &tau; meters on our multi-scale benchmark. Inference memory is the peak required to store and search the reference database. Training time on a single NVIDIA A6000.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ QUALITATIVE ============================ -->
-<section class="section" id="qualitative">
-  <div class="container">
-    <div class="section-header">
-      <div class="kicker">Qualitative</div>
-      <h2>The model lights up the right place on the map</h2>
-      <p class="lede">
-        Cross-view similarity heatmaps overlaid on the satellite view show <strong>where the model believes the photo was taken</strong>. Warm colors mark high similarity to the street-view query; the white <strong>&times;</strong> marks the ground-truth GPS location. The hot region lands directly on it &mdash; even with no panorama, no GPS prior, and limited field of view.
-      </p>
-    </div>
-    <div class="figure-card wide">
-      <img src="static/images/dino_heatmap.png" alt="Cross-view similarity heatmaps over satellite imagery; white X marks ground-truth GPS" loading="lazy">
-      <div class="figure-caption">Each row: a street-view query (left) and the corresponding cross-view similarity heatmaps over the satellite tile. The white &times; marks ground truth.</div>
     </div>
   </div>
 </section>
