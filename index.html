@@ -309,13 +309,14 @@
   <div class="container">
     <div class="section-header">
       <div class="kicker">Qualitative</div>
-      <h2>What the model attends to</h2>
+      <h2>The model lights up the right place on the map</h2>
       <p class="lede">
-        Cross-view feature similarities show the model focuses on persistent structural cues &mdash; rooflines, road geometry, building shapes &mdash; that survive the viewpoint gap between ground and air.
+        Cross-view similarity heatmaps overlaid on the satellite view show <strong>where the model believes the photo was taken</strong>. Warm colors mark high similarity to the street-view query; the white <strong>&times;</strong> marks the ground-truth GPS location. The hot region lands directly on it &mdash; even with no panorama, no GPS prior, and limited field of view.
       </p>
     </div>
     <div class="figure-card wide">
-      <img src="static/images/similarities.jpg" alt="Cross-view feature similarity visualizations" loading="lazy">
+      <img src="static/images/dino_heatmap.png" alt="Cross-view similarity heatmaps over satellite imagery; white X marks ground-truth GPS" loading="lazy">
+      <div class="figure-caption">Each row: a street-view query (left) and the corresponding cross-view similarity heatmaps over the satellite tile. The white &times; marks ground truth.</div>
     </div>
   </div>
 </section>
