@@ -7,7 +7,16 @@
   <meta name="description" content="Find where a photo was taken using just four zoom-in steps over a satellite map. No GPS, no million-tile database. State-of-the-art cross-view geo-localization from The Ohio State University.">
   <meta property="og:title" content="Just Zoom In: Cross-View Geo-Localization via Autoregressive Zooming">
   <meta property="og:description" content="Find where a photo was taken using four zoom-in steps. No GPS, no database search.">
-  <meta property="og:image" content="static/images/teaser_paradigms.png">
+  <meta property="og:image" content="static/images/og-card.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="static/images/og-card.jpg">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -15,13 +24,30 @@
 </head>
 <body>
 
+<!-- ============================ STICKY NAV ============================ -->
+<nav class="topnav" id="topnav" aria-label="Page sections">
+  <div class="container topnav-inner">
+    <a href="#top" class="topnav-brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="brand-mark" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><rect x="10" y="10" width="11" height="11" rx="1"/><rect x="15" y="15" width="6" height="6" rx=".5" fill="currentColor"/></svg>
+      <span><strong>Just Zoom In</strong></span>
+    </a>
+    <div class="topnav-links">
+      <a href="#demo">Demo</a>
+      <a href="#how-it-works">Method</a>
+      <a href="#dataset">Dataset</a>
+      <a href="#results">Results</a>
+      <a href="#bibtex">BibTeX</a>
+    </div>
+  </div>
+</nav>
+
 <!-- ============================ HERO ============================ -->
-<header class="hero">
-  <div class="hero-bg"></div>
+<header class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="container hero-inner">
     <div class="venue-chip">CVPR 2026 &middot; Submission</div>
     <h1 class="hero-title">
-      Just <span class="accent">Zoom In</span>.
+      Just <span class="accent">Zoom In</span>
     </h1>
     <p class="hero-sub">
       Cross-View Geo-Localization via Autoregressive Zooming
@@ -30,43 +56,49 @@
       Find where a photo was taken &mdash; <strong>no&nbsp;GPS</strong>, <strong>no million-tile database&nbsp;search</strong>, just four zoom-in steps over a satellite map.
     </p>
 
-    <div class="authors">
-      <span>Yunus Talha Erzurumlu</span>
-      <span>Jiyong Kwag</span>
-      <span>Alper Yilmaz</span>
+    <div class="authors-line">
+      <span class="authors">
+        <span>Yunus Talha Erzurumlu</span><span class="dot">&middot;</span><span>Jiyong Kwag</span><span class="dot">&middot;</span><span>Alper Yilmaz</span>
+      </span>
+      <span class="aff-sep">&mdash;</span>
+      <span class="affiliation">The Ohio State University</span>
     </div>
-    <div class="affiliation">The Ohio State University</div>
 
     <div class="badges">
       <a class="badge" href="#" aria-label="Paper PDF">
-        <span class="badge-icon">&#128196;</span><span>Paper</span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+        <span>Paper</span>
       </a>
       <a class="badge" href="#" aria-label="arXiv">
-        <span class="badge-icon">&#9881;</span><span>arXiv</span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span>arXiv</span>
       </a>
-      <a class="badge badge-disabled" aria-disabled="true">
-        <span class="badge-icon">&lt;/&gt;</span><span>Code &middot; <em>coming&nbsp;soon</em></span>
+      <a class="badge badge-soft" aria-disabled="true" role="link">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span>Code <em>&middot; soon</em></span>
       </a>
-      <a class="badge badge-disabled" aria-disabled="true">
-        <span class="badge-icon">&#128202;</span><span>Dataset &middot; <em>coming&nbsp;soon</em></span>
+      <a class="badge badge-soft" aria-disabled="true" role="link">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+        <span>Dataset <em>&middot; soon</em></span>
       </a>
-      <a class="badge" href="#bibtex">
-        <span class="badge-icon">&#128221;</span><span>BibTeX</span>
+      <a class="badge" href="#bibtex" aria-label="BibTeX">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H6a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2"/><path d="M16 3h2a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2"/></svg>
+        <span>BibTeX</span>
       </a>
     </div>
 
     <div class="stat-strip">
       <div class="stat">
         <div class="stat-num">+9.6<span class="stat-unit">%</span></div>
-        <div class="stat-label">Recall@100m vs. SOTA<br><span class="dim">(retrieval baseline)</span></div>
+        <div class="stat-label">more queries located within 100&thinsp;m<br><span class="dim">vs. previous best (retrieval baseline)</span></div>
       </div>
       <div class="stat">
         <div class="stat-num">4<span class="stat-unit"> steps</span></div>
-        <div class="stat-label">10&thinsp;km &rarr; 156&thinsp;m<br><span class="dim">coarse-to-fine zoom</span></div>
+        <div class="stat-label">to go from 10&thinsp;km&nbsp;&times;&nbsp;10&thinsp;km to 156&thinsp;m&nbsp;&times;&nbsp;156&thinsp;m<br><span class="dim">no database scan</span></div>
       </div>
       <div class="stat">
         <div class="stat-num">42<span class="stat-unit">%</span></div>
-        <div class="stat-label">Less training time<br><span class="dim">no hard negative mining</span></div>
+        <div class="stat-label">less training time<br><span class="dim">no hard&nbsp;negative mining</span></div>
       </div>
     </div>
   </div>
@@ -79,20 +111,29 @@
       <div class="kicker">See it in action</div>
       <h2>One street photo. Four decisions. Find the spot.</h2>
       <p class="lede">
-        Watch the model collapse a <strong>10&nbsp;km &times; 10&nbsp;km</strong> region down to a <strong>39&nbsp;m &times; 39&nbsp;m</strong> patch in four zoom-in steps. The yellow square is where the model decides to zoom next; the red dot is the ground-truth GPS location.
+        Watch the model collapse a <strong>10&nbsp;km &times; 10&nbsp;km</strong> region down to a <strong>156&nbsp;m &times; 156&nbsp;m</strong> tile in four zoom-in steps.
       </p>
+      <div class="legend">
+        <span class="legend-item"><span class="legend-swatch legend-yellow"></span>Model&rsquo;s chosen patch</span>
+        <span class="legend-item"><span class="legend-swatch legend-red"></span>Ground-truth GPS</span>
+      </div>
     </div>
 
     <div class="zoom-grid">
       <!-- Example 1 -->
       <div class="zoom-row">
-        <div class="zoom-street">
+        <div class="zoom-side zoom-street">
+          <div class="zoom-label"><span class="zoom-label-kicker">Query</span><span class="zoom-label-text">Street view (the input)</span></div>
           <img src="static/images/zoom/ex1_street.jpg" alt="Street-view query &mdash; example 1" loading="lazy">
-          <div class="zoom-caption">Query <span class="muted">&middot; street view</span></div>
         </div>
-        <div class="zoom-arrow">&rarr;</div>
-        <div class="zoom-anim">
-          <img src="static/images/zoom/ex1_zoom.gif" alt="Autoregressive zoom-in sequence &mdash; example 1" loading="lazy">
+        <div class="zoom-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+        <div class="zoom-side zoom-anim">
+          <div class="zoom-label"><span class="zoom-label-kicker">Zoom sequence</span><span class="zoom-label-text">4 decisions &middot; the output</span></div>
+          <video class="zoom-video" autoplay muted loop playsinline poster="static/images/zoom/ex1_l1.jpg">
+            <source src="static/images/zoom/ex1_zoom.mp4" type="video/mp4">
+          </video>
           <div class="zoom-scale-track">
             <span>10&thinsp;km</span><span>2.5&thinsp;km</span><span>625&thinsp;m</span><span>156&thinsp;m</span>
           </div>
@@ -101,13 +142,18 @@
 
       <!-- Example 2 -->
       <div class="zoom-row">
-        <div class="zoom-street">
+        <div class="zoom-side zoom-street">
+          <div class="zoom-label"><span class="zoom-label-kicker">Query</span><span class="zoom-label-text">Street view (the input)</span></div>
           <img src="static/images/zoom/ex2_street.jpg" alt="Street-view query &mdash; example 2" loading="lazy">
-          <div class="zoom-caption">Query <span class="muted">&middot; street view</span></div>
         </div>
-        <div class="zoom-arrow">&rarr;</div>
-        <div class="zoom-anim">
-          <img src="static/images/zoom/ex2_zoom.gif" alt="Autoregressive zoom-in sequence &mdash; example 2" loading="lazy">
+        <div class="zoom-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+        <div class="zoom-side zoom-anim">
+          <div class="zoom-label"><span class="zoom-label-kicker">Zoom sequence</span><span class="zoom-label-text">4 decisions &middot; the output</span></div>
+          <video class="zoom-video" autoplay muted loop playsinline poster="static/images/zoom/ex2_l1.jpg">
+            <source src="static/images/zoom/ex2_zoom.mp4" type="video/mp4">
+          </video>
           <div class="zoom-scale-track">
             <span>10&thinsp;km</span><span>2.5&thinsp;km</span><span>625&thinsp;m</span><span>156&thinsp;m</span>
           </div>
@@ -116,13 +162,18 @@
 
       <!-- Example 3 -->
       <div class="zoom-row">
-        <div class="zoom-street">
+        <div class="zoom-side zoom-street">
+          <div class="zoom-label"><span class="zoom-label-kicker">Query</span><span class="zoom-label-text">Street view (the input)</span></div>
           <img src="static/images/zoom/ex3_street.jpg" alt="Street-view query &mdash; example 3" loading="lazy">
-          <div class="zoom-caption">Query <span class="muted">&middot; street view</span></div>
         </div>
-        <div class="zoom-arrow">&rarr;</div>
-        <div class="zoom-anim">
-          <img src="static/images/zoom/ex3_zoom.gif" alt="Autoregressive zoom-in sequence &mdash; example 3" loading="lazy">
+        <div class="zoom-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+        <div class="zoom-side zoom-anim">
+          <div class="zoom-label"><span class="zoom-label-kicker">Zoom sequence</span><span class="zoom-label-text">4 decisions &middot; the output</span></div>
+          <video class="zoom-video" autoplay muted loop playsinline poster="static/images/zoom/ex3_l1.jpg">
+            <source src="static/images/zoom/ex3_zoom.mp4" type="video/mp4">
+          </video>
           <div class="zoom-scale-track">
             <span>10&thinsp;km</span><span>2.5&thinsp;km</span><span>625&thinsp;m</span><span>156&thinsp;m</span>
           </div>
@@ -137,25 +188,31 @@
   <div class="container">
     <div class="section-header">
       <div class="kicker">Why it matters</div>
-      <h2>Where this changes the game</h2>
+      <h2>Where it works</h2>
       <p class="lede">
-        GPS isn&rsquo;t always available &mdash; jammed, spoofed, blocked by terrain, or just unreliable indoors and underground. <em>Just Zoom In</em> localizes a single photo against publicly available satellite imagery, with a tiny inference footprint that fits on the edge.
+        GPS isn&rsquo;t always available &mdash; jammed, spoofed, blocked by terrain, or just unreliable in dense urban canyons and forested environments. <em>Just Zoom In</em> localizes a single photo against publicly available satellite imagery, with a tiny inference footprint that fits on the edge.
       </p>
     </div>
 
     <div class="pills">
       <div class="pill">
-        <div class="pill-icon">&#128752;</div>
+        <div class="pill-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="18" r="2.4"/><rect x="9" y="9" width="6" height="6" rx="1"/><line x1="7.7" y1="7.7" x2="9.5" y2="9.5"/><line x1="16.3" y1="7.7" x2="14.5" y2="9.5"/><line x1="7.7" y1="16.3" x2="9.5" y2="14.5"/><line x1="16.3" y1="16.3" x2="14.5" y2="14.5"/></svg>
+        </div>
         <h3>Drone &amp; UAV navigation</h3>
         <p>Recover position from on-board cameras when GPS is jammed, spoofed, or unavailable &mdash; over cities, forests, or open terrain.</p>
       </div>
       <div class="pill">
-        <div class="pill-icon">&#128663;</div>
+        <div class="pill-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13"/><path d="M3 13h18v5a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-1H7v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-5z"/><circle cx="7.5" cy="16" r="1.1"/><circle cx="16.5" cy="16" r="1.1"/></svg>
+        </div>
         <h3>Autonomous vehicle backup</h3>
         <p>Visual fallback for GPS dropouts in tunnels, urban canyons, and parking structures &mdash; matched directly against satellite maps.</p>
       </div>
       <div class="pill">
-        <div class="pill-icon">&#128737;</div>
+        <div class="pill-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.4" y2="15.4"/><line x1="10.5" y1="7.5" x2="10.5" y2="13.5"/><line x1="7.5" y1="10.5" x2="13.5" y2="10.5"/></svg>
+        </div>
         <h3>Search &amp; rescue</h3>
         <p>Pinpoint where a victim&rsquo;s photo, dash-cam frame, or witness image was taken &mdash; without metadata, GPS, or panoramas.</p>
       </div>
@@ -168,13 +225,13 @@
   <div class="container">
     <div class="section-header">
       <div class="kicker">How it works</div>
-      <h2>Localization as a sequence of decisions</h2>
+      <h2>Four decisions instead of a million searches</h2>
     </div>
 
     <div class="two-col">
       <div class="prose">
         <p>Conventional cross-view methods treat the world as a flat database of satellite tiles and pick the closest match by similarity. That requires <strong>millions of stored embeddings</strong>, expensive nearest-neighbor search, and a contrastive training pipeline with hard&nbsp;negative mining.</p>
-        <p><em>Just Zoom In</em> reformulates the problem as <strong>autoregressive zooming</strong>. The model starts from a wide satellite view and, at each step, picks one of 16 sub-patches to zoom into. After four steps, it has narrowed in on a 39&thinsp;m &times; 39&thinsp;m cell &mdash; the predicted location.</p>
+        <p><em>Just Zoom In</em> reformulates the problem as <strong>autoregressive zooming</strong>. The model starts from a wide satellite view and, at each step, picks one of 16 sub-patches to zoom into. After four steps, it has narrowed in on a 156&thinsp;m &times; 156&thinsp;m tile &mdash; the predicted location.</p>
         <p>The architecture is intentionally simple: a shared DINOv2 vision encoder for both street and satellite views, plus a small causal transformer that predicts the next zoom action. <strong>No contrastive loss. No hard negative mining. No database scan.</strong></p>
       </div>
       <div class="figure-card">
@@ -192,12 +249,13 @@
       <div class="kicker">The problem we set out to solve</div>
       <h2>Coverage mismatch breaks tile retrieval</h2>
       <p class="lede">
-        A street view often sees landmarks that fall <em>outside</em> the satellite patch it&rsquo;s matched against &mdash; the stadium and its gate below are visible from the ground but cropped out of the candidate tile. Retrieval models trained on isolated tiles never learn this multi-scale context. Zooming does.
+        A street view often sees landmarks that fall <em>outside</em> the satellite patch it&rsquo;s matched against. Retrieval models trained on isolated tiles never learn this multi-scale context. Zooming does.
       </p>
     </div>
 
     <div class="figure-card wide">
       <img src="static/images/coverage_mismatch.png" alt="Coverage mismatch between street-view image and a small satellite tile" loading="lazy">
+      <div class="figure-caption">In the street view (a), a stadium and its distinctive gate are clearly visible. In the candidate satellite tile (b) from the same region, the landmark falls outside the crop entirely &mdash; retrieval has no chance.</div>
     </div>
 
     <div class="two-col" style="margin-top: 3.5rem;">
@@ -232,16 +290,16 @@
     <div class="two-col" style="margin-top: 3.5rem;">
       <div class="figure-card">
         <img src="static/images/dataset_map.png" alt="Dataset spatial coverage over Washington D.C." loading="lazy">
-        <div class="figure-caption">Coverage map: blue = no photos, red = densest sampling. ~10&thinsp;km &times; 10&thinsp;km region across urban and rural D.C.</div>
+        <div class="figure-caption">Coverage map across Washington&nbsp;D.C.: blue = no photos, red = densest sampling, spanning urban centers to surrounding rural regions.</div>
       </div>
       <div class="prose">
         <h3 class="sub-h">What&rsquo;s different from prior benchmarks</h3>
         <ul class="check-list">
-          <li><span class="check">&#10003;</span> <strong>Limited, random field of view</strong> &mdash; not 360&deg; panoramas</li>
-          <li><span class="check">&#10003;</span> <strong>Unknown orientation</strong> &mdash; matches real-world capture</li>
-          <li><span class="check">&#10003;</span> <strong>Crowd-sourced quality</strong> &mdash; blur, glare, occlusion, diverse cameras</li>
-          <li><span class="check">&#10003;</span> <strong>Multi-scale satellite hierarchy</strong> &mdash; 10&thinsp;km / 2.5&thinsp;km / 625&thinsp;m / 156&thinsp;m</li>
-          <li><span class="check">&#10003;</span> <strong>Permissive licensing</strong> &mdash; CC&nbsp;BY-SA street, CC&nbsp;BY&nbsp;4.0 satellite</li>
+          <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg></span> <span><strong>Limited, random field of view</strong> &mdash; not 360&deg; panoramas</span></li>
+          <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg></span> <span><strong>Unknown orientation</strong> &mdash; matches real-world capture</span></li>
+          <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg></span> <span><strong>Crowd-sourced quality</strong> &mdash; blur, glare, occlusion, diverse cameras</span></li>
+          <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg></span> <span><strong>Multi-scale satellite hierarchy</strong> &mdash; 10&thinsp;km / 2.5&thinsp;km / 625&thinsp;m / 156&thinsp;m</span></li>
+          <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg></span> <span><strong>Permissive licensing</strong> &mdash; CC&nbsp;BY-SA street, CC&nbsp;BY&nbsp;4.0 satellite</span></li>
         </ul>
       </div>
     </div>
@@ -264,12 +322,12 @@
         <thead>
           <tr>
             <th>Method</th>
-            <th>R@40m &uarr;</th>
-            <th>R@50m &uarr;</th>
-            <th>R@100m &uarr;</th>
-            <th>Inf. Memory &darr;</th>
-            <th>Train. Time &darr;</th>
-            <th>HNM needed?</th>
+            <th><div class="th-main">Within 40&thinsp;m <span class="th-arrow">&uarr;</span></div><div class="th-sub">R@40m</div></th>
+            <th><div class="th-main">Within 50&thinsp;m <span class="th-arrow">&uarr;</span></div><div class="th-sub">R@50m</div></th>
+            <th><div class="th-main">Within 100&thinsp;m <span class="th-arrow">&uarr;</span></div><div class="th-sub">R@100m</div></th>
+            <th><div class="th-main">Inf. memory <span class="th-arrow">&darr;</span></div><div class="th-sub">GB at inference</div></th>
+            <th><div class="th-main">Train time <span class="th-arrow">&darr;</span></div><div class="th-sub">A6000 GPU hours</div></th>
+            <th><div class="th-main">Needs HNM?</div><div class="th-sub">hard negative mining</div></th>
           </tr>
         </thead>
         <tbody>
@@ -299,7 +357,7 @@
           </tr>
         </tbody>
       </table>
-      <p class="table-caption">Recall@1 within &tau; meters on our multi-scale benchmark. Inference memory is peak required to store and search the reference database. Training time on a single NVIDIA A6000. HNM = hard negative mining.</p>
+      <p class="table-caption">Recall@1 within &tau; meters on our multi-scale benchmark. Inference memory is the peak required to store and search the reference database. Training time on a single NVIDIA A6000.</p>
     </div>
   </div>
 </section>
@@ -342,13 +400,22 @@
 
 <!-- ============================ FOOTER ============================ -->
 <footer class="footer">
-  <div class="container">
-    <p class="ack">
-      <strong>Acknowledgments.</strong> Street-view imagery is sourced from <a href="https://www.mapillary.com/" target="_blank" rel="noopener">Mapillary</a> (CC&nbsp;BY-SA). Aerial orthophotos are sourced from the <a href="https://opendata.dc.gov/" target="_blank" rel="noopener">Open Data DC</a> portal (CC&nbsp;BY&nbsp;4.0).
-    </p>
-    <p class="footer-meta">
-      Page template adapted from the <a href="https://nerfies.github.io/" target="_blank" rel="noopener">Nerfies</a> project page. &copy; 2026 The Photogrammetric Computer Vision Lab, The Ohio State University.
-    </p>
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p><a href="mailto:yilmaz.15@osu.edu">yilmaz.15@osu.edu</a></p>
+      <p class="muted">Photogrammetric Computer Vision Lab<br>The Ohio State University</p>
+    </div>
+    <div class="footer-col">
+      <h4>Data &amp; imagery</h4>
+      <p>Street views from <a href="https://www.mapillary.com/" target="_blank" rel="noopener">Mapillary</a> (CC&nbsp;BY-SA).</p>
+      <p>Aerial orthophotos from <a href="https://opendata.dc.gov/" target="_blank" rel="noopener">Open Data DC</a> (CC&nbsp;BY&nbsp;4.0).</p>
+    </div>
+    <div class="footer-col">
+      <h4>About this page</h4>
+      <p class="muted">Layout adapted from the <a href="https://nerfies.github.io/" target="_blank" rel="noopener">Nerfies</a> project page.</p>
+      <p class="muted">&copy; 2026 The Ohio State University.</p>
+    </div>
   </div>
 </footer>
 
