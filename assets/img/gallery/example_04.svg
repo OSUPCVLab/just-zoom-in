@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" role="img" aria-label="Low sun / shadows placeholder image">
+      <rect width="640" height="420" fill="#efefef"/>
+      <rect x="0" y="250" width="640" height="170" fill="#cfcfcf"/>
+      <path d="M260 420 L330 250 L390 420Z" fill="#aaaaaa"/>
+      <path d="M313 420 L335 250 L357 420Z" fill="#eeeeee" opacity="0.7"/>
+      <rect x="55" y="120" width="90" height="130" fill="#dadada" stroke="#777"/>
+      <rect x="165" y="95" width="120" height="155" fill="#d4d4d4" stroke="#777"/>
+      <rect x="470" y="135" width="95" height="115" fill="#d9d9d9" stroke="#777"/>
+      <circle cx="505" cy="110" r="26" fill="#f7f7f7" stroke="#777"/>
+      <path d="M0 250 C130 220 210 238 320 225 C450 210 520 230 640 205 L640 250Z" fill="#bfc7bf" opacity="0.85"/>
+      <text x="24" y="42" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#111">Low sun / shadows</text>
+      <text x="24" y="72" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#555">Replace with a real dataset frame</text>
+    </svg>

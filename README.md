@@ -1,30 +1,27 @@
-# Just Zoom In — project page
+# Just Zoom In project website
 
-Static project page for **Just Zoom In: Cross-View Geo-Localization via Autoregressive Zooming** (CVPR 2026 submission).
+Minimal static GitHub Pages website for:
 
-Authors: Yunus Talha Erzurumlu, Jiyong Kwag, Alper Yilmaz — The Ohio State University.
+**Just Zoom In: Cross-View Geo-Localization via Autoregressive Zooming**
 
-## Preview locally
+## Local preview
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open `http://localhost:8000`.
+Then open http://localhost:8000.
 
-## Deploy on GitHub Pages
+## Editing checklist
 
-Two common options:
+- Replace author profile placeholders in `index.html`.
+- Update the dataset gallery in `index.html` when adding or removing files from `streetview_samples/`.
+- Keep `CITATION.bib` and the BibTeX block in `index.html` in sync if citation metadata changes.
 
-1. **Project Pages from `/docs`** — push the contents of this folder into a `docs/` directory on an existing repo's default branch, then in repo settings enable Pages → Source: `main` branch, folder `/docs`.
-2. **Project Pages from a `gh-pages` branch** — push this folder as the root of a `gh-pages` branch on any repo, then enable Pages → Source: `gh-pages` branch.
+## Animation notes
 
-The page is fully static — no build step.
+The zoom demo is implemented with plain JavaScript in `assets/js/main.js`. It cycles through generated street-view and satellite crops in `demo_samples/`. This is intentionally lightweight so it works on GitHub Pages without Node, React, or a build step.
 
-## Updating
+## GitHub Pages
 
-- Page content: `index.html`
-- Styles: `static/css/style.css`
-- Behavior (BibTeX copy): `static/js/main.js`
-- Figures: `static/images/`
-- Zoom-demo assets: `static/images/zoom/`
+Put `index.html` at the root of the repository and enable GitHub Pages from the repository settings using the `main` branch and `/root` as the publishing source.
